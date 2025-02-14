@@ -1,0 +1,10 @@
+main()
+
+fn main() (
+    &a = 0
+    &b = 10
+    loop (
+        &a = 1 - a
+        b = a
+    )
+)
