@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 #define STACK_SZ (128 * 1024 * 1024)
-#define SRC "test/02"
+#define SRC "test/04"
 #define MEM_SZ (1 << 20)
 #define COMP_SZ (1 << 20)
 #define BUF_SZ (1 << 10)
@@ -587,13 +587,13 @@ void run_script(union mem* mem) {
                 mem[GLOBAL_SP].val -= 1;
                 break;
             case OP_SVC:
-                a1 = mem[mem[GLOBAL_SP].val - 1].val;
+                a1 = mem[GLOBAL_IO].val;
                 if (a1 == 0) {
-                    read(STDIN_FILENO, &mem[GLOBAL_IO], 1);
+                    read(STDIN_FILENO, &mem[mem[GLOBAL_SP].val - 1].val, 1);
                 } else if (a1 == 1) {
-                    write(STDOUT_FILENO, &mem[GLOBAL_IO], 1);
+                    write(STDOUT_FILENO, &mem[mem[GLOBAL_SP].val - 1].val, 1);
                 } else if (a1 == 2) {
-                    usleep(mem[GLOBAL_IO].val * 1000);
+                    usleep(mem[mem[GLOBAL_SP].val - 1].val * 1000);
                 }
                 break;
             default:

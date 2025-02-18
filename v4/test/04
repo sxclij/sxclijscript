@@ -1,0 +1,77 @@
+main()
+
+fn _read() (
+    4 = 0
+    &result = svc(0)
+    return (result)
+)
+
+fn _write(ch) (
+    4 = 1
+    &result = svc(ch)
+    return (0)
+)
+
+fn _msleep(t) (
+    4 = 2
+    &result = svc(t)
+    return (0)
+)
+
+fn _allocate(dst, size) (
+    &x = *3 - 2
+    x = *x + size + 2
+    dst = x
+)
+
+fn vec_init(v) (
+    v = 0
+)
+
+fn vec_size(v) (
+    return (*v)
+)
+
+fn vec_get(v, i) (
+    return (*(v + i + 1))
+)
+
+fn vec_provide(v, i) (
+    return (v + i + 1)
+)
+
+fn vec_set(v, i, x) (
+    v + i + 1 = x
+)
+
+fn vec_push(v, x) (
+    v = *v + 1
+    v + *v = x
+)
+
+fn vec_pop(v) (
+    &result = v + *v
+    v = *v - 1
+    return (result)
+)
+
+fn input_ch(ch) (
+    &result = _write(ch)
+)
+
+fn input() (
+    loop (
+        &ch = _read()
+        if(ch == 0) (
+            break
+        )
+        input_ch(ch)
+    )
+)
+
+fn main() (
+    loop (
+        input()
+        &result = _msleep(100)
+    )
+)
